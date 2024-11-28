@@ -1,0 +1,87 @@
+import random
+
+# Funkcija, kas parāda spēles ievadu un izvēles
+def show_intro():
+    print("Jūs esat piedzimis pazemē, un jums ir jāiznāk uz virsmas, lai izdzīvotu.")
+    print("Jūs atrodaties šaurā pazemes ejā. Jūs redzat divus ceļus.")
+    print("1. Izvēlieties ceļu pa kreisi.")
+    print("2. Izvēlieties ceļu pa labi.")
+    print("Kas būs jūsu izvēle? (1 vai 2)")
+
+# Funkcija, kas atkarībā no spēlētāja izvēles virza spēli uz priekšu
+def left_path():
+    print("\nJūs izvēlējāties kreiso ceļu.")
+    print("Pazemē ir tumšs un mitrs. Jūs dzirdat kaut kādus trokšņus priekšā.")
+    print("1. Paskatīties, kas ir priekšā.")
+    print("2. Uzbrukt trokšņa virzienā.")
+    choice = input("Kas būs jūsu izvēle? (1 vai 2): ")
+    
+    if choice == "1":
+        print("\nJūs pieiet tuvāk un redzat lielu pelēku čūsku. Tā izskatās agresīvi.")
+        print("Jūs nolēmāt uzmanīgi atgriezties pie krustojuma.")
+        return 'start' # Atgriezties sākumā
+    elif choice == "2":
+        print("\nJūs uzbrūkāt čūskai, bet tā ir pārāk spēcīga! Jūs esat sakosts un nomirstat.")
+        return 'game_over'
+    else:
+        print("Nesaprotama izvēle. Atgriežamies pie sākuma.")
+        return 'start'
+def right_path():
+    print("\nJūs izvēlējāties labo ceļu.")
+    print("Ceļš ir šaurāks, bet jūs dzirdat dzīvotspējīgāku skaņu.")
+    print("1. Sekot skaņām.")
+    print("2. Atgriezties pie krustojuma.")
+    choice = input("Kas būs jūsu izvēle? (1 vai 2): ")
+    
+    if choice == "1":
+        print("\nJūs sekojat skaņām un atrodat ūdens avotu. Tas ir dzīvotspējīgs ceļš, kur jūs varat atpūsties.")
+        return 'win'
+    elif choice == "2":
+        print("\nJūs atgriežaties pie sākuma, jo neesat pārliecināts par ceļu.")
+        return 'start'
+    else:
+        print("Nesaprotama izvēle. Atgriežamies pie sākuma.")
+        return 'start'
+
+# Funkcija spēles sākumam
+
+def start_game():
+    print("\nSpēle sākas!")
+    show_intro()
+    choice = input("Kas būs jūsu izvēle? (1 vai 2): ")
+    
+    if choice == "1":
+        result = left_path()
+    elif choice == "2":
+        result = right_path()
+    else:
+        print("Nesaprotama izvēle.")
+        result = 'start'
+    return result
+
+# Funkcija, kas pārbauda spēles beigas
+
+def end_game(result):
+    if result == 'game_over':
+        print("\nSpēle beidzās. Jūs esat miris. Paldies, ka spēlējāt!")
+    elif result == 'win':
+        print("\nApsveicam! Jūs atradāt ceļu uz virsmas un izdzīvojāt!")
+    elif result == 'start':
+        print("\nMēs atgriezāmies sākumā. Spēle turpinās...")
+
+# Galvenā funkcija
+
+def main():
+    while True:
+        result = start_game()
+        end_game(result)
+        play_again = input("\nVai vēlaties spēlēt vēlreiz? (jā/nē): ")
+        if play_again.lower() != "jā":
+            print("Paldies par spēli!")
+            break
+
+# Palaist spēli
+
+if __name__ == "__main__":
+
+    main()
